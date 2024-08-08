@@ -1,5 +1,6 @@
 package com.example.userdetailsappcompose
 
+import UserListScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,26 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import com.example.userdetailsappcompose.ui.theme.UserDetailsAppComposeTheme
-import androidx.activity.viewModels
 import androidx.compose.ui.res.painterResource
-import com.example.userdetailsappcompose.com.example.userdetailsappcompose.UserListScreen
 import com.example.userdetailsappcompose.network.RetrofitInstance
-import com.example.userdetailsappcompose.viewModel.UserViewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val userViewModel: UserViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val retrofitInstance = RetrofitInstance()
         setContent {
             UserDetailsAppComposeTheme {
                 BackgroundImageContent {
-
                     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                         UserListScreen(
                             modifier = Modifier.padding(innerPadding),
-                            userViewModel = userViewModel
+                            retrofitInstance = retrofitInstance
                         )
                     }
                 }

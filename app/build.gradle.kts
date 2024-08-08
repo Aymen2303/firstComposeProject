@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.converter.gson)
     implementation (libs.retrofit2.retrofit)
+    implementation (libs.logging.interceptor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

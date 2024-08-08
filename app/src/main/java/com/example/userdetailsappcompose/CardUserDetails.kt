@@ -1,5 +1,6 @@
-package com.example.userdetailsappcompose.com.example.userdetailsappcompose
+package com.example.userdetailsappcompose
 
+import User
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.userdetailsappcompose.model.User
 import com.example.userdetailsappcompose.R
 
 @Composable
@@ -42,7 +42,7 @@ fun CardUserDetails(user: User) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = user.pictureUrl),
+                    painter = rememberAsyncImagePainter(model = user.picture.large),
                     contentDescription = "User profile picture",
                     modifier = Modifier
                         .size(75.dp)
@@ -58,7 +58,7 @@ fun CardUserDetails(user: User) {
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = user.name,
+                        text = user.name.first,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
@@ -74,7 +74,7 @@ fun CardUserDetails(user: User) {
                         )
                     )
                     Text(
-                        text = user.country,
+                        text = user.location.country,
                         style = TextStyle(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Normal,

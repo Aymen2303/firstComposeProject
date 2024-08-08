@@ -1,15 +1,16 @@
 package com.example.userdetailsappcompose.network
 
-import com.example.userdetailsappcompose.model.User
+import ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface UserService {
 
-    @GET("/?results={resultsNum}")
+    @GET("/")
     suspend fun listUsers(
-        @Path("resultsNum") userSize: Int,
-    ): List<User>
+        @Query("resultsNum") userSize: Int,
+    ): ApiResponse
 
 }
