@@ -27,26 +27,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.userdetailsappcompose.ui.theme.UserDetailsAppComposeTheme
+import Model.User
+import androidx.activity.viewModels
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberImagePainter
 
 class MainActivity : ComponentActivity() {
+
+    private val userViewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             UserDetailsAppComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                BackgroundImageContent {
+                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                        UserListScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            userViewModel = userViewModel
+                        )
+                    }
                 }
             }
         }
@@ -54,7 +61,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CardUserDetails() {
+fun BackgroundImageContent(content: @Composable () -> Unit) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        content()
+    }
+}
+
+@Composable
+fun CardUserDetails(user: User) {
     OutlinedCard(
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.backgroundColor),
@@ -73,7 +93,7 @@ fun CardUserDetails() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.profilepic),
+                    painter = rememberImagePainter(data = user.pictureUrl),
                     contentDescription = "User profile picture",
                     modifier = Modifier
                         .size(75.dp)
@@ -89,7 +109,7 @@ fun CardUserDetails() {
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        "User.name,",
+                        text = user.name,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
@@ -97,7 +117,7 @@ fun CardUserDetails() {
                         )
                     )
                     Text(
-                        "This is email",
+                        text = user.email,
                         style = TextStyle(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Normal,
@@ -105,7 +125,7 @@ fun CardUserDetails() {
                         )
                     )
                     Text(
-                        "This is country",
+                        text = user.country,
                         style = TextStyle(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Normal,
@@ -127,21 +147,5 @@ fun CardUserDetails() {
                     .padding(8.dp)
             )
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UserDetailsAppComposeTheme {
-        CardUserDetails()
     }
 }
