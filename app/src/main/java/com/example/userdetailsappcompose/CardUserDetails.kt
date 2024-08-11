@@ -1,4 +1,4 @@
-package com.example.userdetailsappcompose
+package com.example.userdetailsappcompose.com.example.userdetailsappcompose
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -19,7 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import Model.User
+import com.example.userdetailsappcompose.Model.User
+import com.example.userdetailsappcompose.R
 
 @Composable
 fun CardUserDetails(user: User) {

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import Model.User
+import com.example.userdetailsappcompose.Model.User
 import org.json.JSONArray
 import java.net.HttpURLConnection
 import java.net.URL

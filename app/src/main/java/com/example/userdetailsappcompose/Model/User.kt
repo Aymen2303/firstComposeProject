@@ -1,4 +1,4 @@
-package Model
+package com.example.userdetailsappcompose.Model
 
 import java.text.SimpleDateFormat
 import java.util.Date

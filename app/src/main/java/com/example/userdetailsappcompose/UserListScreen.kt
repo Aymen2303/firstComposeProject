@@ -1,4 +1,4 @@
-package com.example.userdetailsappcompose
+package com.example.userdetailsappcompose.com.example.userdetailsappcompose
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -9,11 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import Model.User
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.style.TextAlign
-import org.w3c.dom.Text
+import com.example.userdetailsappcompose.UserViewModel
 
 @Composable
 fun UserListScreen(modifier: Modifier = Modifier, userViewModel: UserViewModel) {
