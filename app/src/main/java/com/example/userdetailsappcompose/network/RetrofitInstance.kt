@@ -9,5 +9,5 @@ class RetrofitInstance {
         .baseUrl("https://randomuser.me/api")
         .build()
 
-    var service = retrofit.create(GitHubService::class.java)
+    var service = retrofit.create(UserService::class.java)
 }
