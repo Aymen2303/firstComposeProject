@@ -15,6 +15,8 @@ import com.example.userdetailsappcompose.ui.theme.UserDetailsAppComposeTheme
 import androidx.activity.viewModels
 import androidx.compose.ui.res.painterResource
 import com.example.userdetailsappcompose.com.example.userdetailsappcompose.UserListScreen
+import com.example.userdetailsappcompose.network.RetrofitInstance
+import com.example.userdetailsappcompose.viewModel.UserViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -25,6 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             UserDetailsAppComposeTheme {
                 BackgroundImageContent {
+
                     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                         UserListScreen(
                             modifier = Modifier.padding(innerPadding),

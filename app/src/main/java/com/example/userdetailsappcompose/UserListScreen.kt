@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.style.TextAlign
-import com.example.userdetailsappcompose.UserViewModel
+import com.example.userdetailsappcompose.viewModel.UserViewModel
 
 @Composable
 fun UserListScreen(modifier: Modifier = Modifier, userViewModel: UserViewModel) {

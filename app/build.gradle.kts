@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("plugin.serialization") version "2.0.10"
 }
 
 android {
@@ -59,7 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation(libs.coil.compose)
+    implementation(libs.converter.gson)
     implementation (libs.retrofit2.retrofit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

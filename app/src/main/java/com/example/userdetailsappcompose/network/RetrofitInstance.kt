@@ -2,10 +2,8 @@ package com.example.userdetailsappcompose.network
 
 import retrofit2.Retrofit
 
-
-
 class RetrofitInstance {
-    var retrofit: Retrofit = Retrofit.Builder()
+    private var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://randomuser.me/api")
         .build()
 

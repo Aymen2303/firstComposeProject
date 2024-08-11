@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.userdetailsappcompose.Model.User
+import com.example.userdetailsappcompose.model.User
 import com.example.userdetailsappcompose.R
 
 @Composable
