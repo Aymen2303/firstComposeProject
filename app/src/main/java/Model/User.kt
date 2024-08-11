@@ -16,10 +16,10 @@ class User(
         fun fromJson(json: Map<String, Any>): User {
             val name = "${(json["name"] as Map<String, String>)["first"]} ${(json["name"] as Map<String, String>)["last"]}"
             val email = json["email"] as String
-            val country = (json["location"] as Map<String, String>)["country"]!!
-            val pictureUrl = (json["picture"] as Map<String, String>)["large"]!!
+            val country = (json["location"] as Map<String, String>)["country"]?: ""
+            val pictureUrl = (json["picture"] as Map<String, String>)["large"]?: ""
             val phoneNumber = json["phone"] as String
-            val dateOfBirth = (json["dob"] as Map<String, String>)["date"]!!
+            val dateOfBirth = (json["dob"] as Map<String, String>)["date"]?: ""
 
             return User(
                 name = name,
@@ -27,7 +27,7 @@ class User(
                 country = country,
                 pictureUrl = pictureUrl,
                 phoneNumber = phoneNumber,
-                dateOfBirth = dateOfBirth
+                dateOfBirth = dateOfBirth,
             )
         }
     }

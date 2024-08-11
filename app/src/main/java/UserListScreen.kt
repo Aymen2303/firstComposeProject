@@ -10,15 +10,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import Model.User
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.style.TextAlign
+import org.w3c.dom.Text
 
 @Composable
 fun UserListScreen(modifier: Modifier = Modifier, userViewModel: UserViewModel) {
     val users by userViewModel.users.collectAsState()
-    val user : User
-    LazyColumn(modifier = modifier) {
-        items(users) { user ->
-            CardUserDetails(user)
-            Spacer(modifier = Modifier.height(8.dp))
+    if(users.isEmpty()){
+        Text(text = "no users to display...",
+            modifier = Modifier
+                .fillMaxSize(),
+            textAlign = TextAlign.Center
+                )
+    } else {
+        LazyColumn(modifier = modifier) {
+            items(users) { user ->
+                CardUserDetails(user)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
         }
     }
 }
