@@ -1,4 +1,5 @@
 import android.util.Log
+import androidx.annotation.UiContext
 import androidx.compose.runtime.*
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Spacer
@@ -12,23 +13,21 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.text.style.TextAlign
 import com.example.userdetailsappcompose.CardUserDetails
 import com.example.userdetailsappcompose.network.RetrofitInstance
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 @Composable
 fun UserListScreen(modifier: Modifier = Modifier, retrofitInstance: RetrofitInstance) {
     val users = remember { mutableStateOf<List<User>>(emptyList()) }
-    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        coroutineScope.launch {
             try {
                 val getUsers = retrofitInstance.service.listUsers(10)
                 users.value = getUsers.results
-                Log.d("Apiresponse"," response is: $users.value")
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("ApiError", "Error fetching users", e)
             }
-        }
     }
 
     if (users.value.isEmpty()) {

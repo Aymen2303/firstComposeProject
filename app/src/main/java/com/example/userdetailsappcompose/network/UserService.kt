@@ -10,7 +10,7 @@ interface UserService {
 
     @GET("/")
     suspend fun listUsers(
-        @Query("resultsNum") userSize: Int,
+        @Query("results") userSize: Int,
     ): ApiResponse
 
 }

@@ -40,4 +40,3 @@ data class Dob(
     @SerializedName("date")
     val date: String
 )
-
