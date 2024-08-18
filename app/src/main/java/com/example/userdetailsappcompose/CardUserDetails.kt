@@ -27,9 +27,12 @@ fun CardUserDetails(user: User) {
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.backgroundColor),
         ),
-        border = BorderStroke(1.dp, color = colorResource(id = R.color.selected)),
+        border = BorderStroke(
+            1.dp,
+            color = colorResource(id = R.color.selected)
+        ),
         modifier = Modifier
-            .size(width = 310.dp, height = 150.dp)
+            .size(width = 350.dp, height = 150.dp)
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -57,7 +60,7 @@ fun CardUserDetails(user: User) {
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = user.name.first,
+                        text = "${user.name.first} ${user.name.last}",
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,

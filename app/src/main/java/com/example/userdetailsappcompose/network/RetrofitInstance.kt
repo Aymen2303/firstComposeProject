@@ -10,21 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
 
-    val gson = GsonBuilder()
-        .registerTypeAdapter(ApiResponse::class.java, JsonDeserializer<ApiResponse> { json, _, _ ->
-            val jsonObject = json.asJsonObject
-            val resultsJson = jsonObject.get("results").asJsonArray
-            val usersList = Gson().fromJson(resultsJson, Array<User>::class.java).toList()
-            ApiResponse(usersList)
-        })
-        .setLenient()
-        .create()
-
     private var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://randomuser.me/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
-
 
     var service = retrofit.create(UserService::class.java)
 }

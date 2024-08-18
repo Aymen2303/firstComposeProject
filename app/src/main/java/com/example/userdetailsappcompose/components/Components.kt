@@ -1,5 +1,4 @@
 import androidx.compose.foundation.layout.size
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.AlertDialog
@@ -26,7 +25,7 @@ fun CustomFAB(
 ) {
     FloatingActionButton(
             onClick = onClick,
-           containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = contentColor,
             modifier = modifier.size(56.dp)
     ) {
@@ -45,7 +44,14 @@ fun CustomAlertDialog(
 ){
     AlertDialog(
         onDismissRequest = {
-            if (dismissible) onDismissRequest
+            if (dismissible) onDismissRequest()
+        },
+        title = {
+            Text(text = title)
+        },
+
+        text = {
+            Text(text = message)
         },
         confirmButton = {
             ElevatedButton(
