@@ -11,28 +11,34 @@ import com.example.userdetailsappcompose.CardUserDetails
 import com.example.userdetailsappcompose.network.RetrofitInstance
 
 @Composable
-fun UserListScreen(modifier: Modifier = Modifier, retrofitInstance: RetrofitInstance) {
-    val users = remember { mutableStateOf<List<User>>(emptyList()) }
+fun UserListScreen(
+    retrofitInstance: RetrofitInstance,
+    modifier: Modifier = Modifier
+) {
+    val users = remember { mutableStateListOf<User>() }
 
     LaunchedEffect(Unit) {
         try {
             val response = retrofitInstance.service.listUsers(10)
-            users.value = response.results
-            print("users are:${users.value}")
+            users.clear()
+            users.addAll(response.results)
+
         } catch (e: Exception) {
             Log.e("ApiError", "Error fetching users", e)
         }
     }
 
-    if (users.value.isEmpty()) {
+    if ( users.isEmpty()) {
         Text(
             text = "No users to display...",
             modifier = Modifier.fillMaxSize(),
             textAlign = TextAlign.Center
         )
     } else {
-        LazyColumn(modifier = modifier) {
-            items(users.value) { user ->
+        LazyColumn(
+            modifier = modifier
+        ) {
+            items(users) { user ->
                 CardUserDetails(user)
                 Spacer(modifier = Modifier.height(8.dp))
             }

@@ -37,8 +37,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BackgroundImageContent(content: @Composable () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize()) {
+fun BackgroundImageContent(
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Image(
             painter = painterResource(id = R.drawable.background),
             contentDescription = null,
