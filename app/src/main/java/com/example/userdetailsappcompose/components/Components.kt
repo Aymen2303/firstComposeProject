@@ -7,7 +7,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,12 +23,12 @@ fun CustomFAB(
     contentColor: Color = colorResource(id = R.color.selected)
 ) {
     FloatingActionButton(
-            onClick = onClick,
-            containerColor = Color.White,
-            contentColor = contentColor,
-            modifier = modifier.size(56.dp)
+        onClick = onClick,
+        containerColor = Color.White,
+        contentColor = contentColor,
+        modifier = modifier.size(56.dp)
     ) {
-            Icon(Icons.Rounded.Refresh, contentDescription = "Refresh")
+        Icon(Icons.Rounded.Refresh, contentDescription = "Refresh")
     }
 
 }
@@ -46,25 +45,16 @@ fun CustomAlertDialog(
         onDismissRequest = {
             if (dismissible) onDismissRequest()
         },
-        title = {
-            Text(text = title)
-        },
-
-        text = {
-            Text(text = message)
-        },
+        title = { Text(text = title) },
+        text = { Text(text = message) },
         confirmButton = {
             ElevatedButton(
                 onClick = onConfirm,
-                colors =  ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.backgroundButton)
-                )
+                colors =  ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.backgroundButton))
             ) {
                 Text(
-                    "Refresh",
-                    style = TextStyle(
-                        color = colorResource(id = R.color.selected)
-                    )
+                    text = "Refresh",
+                    style = TextStyle(color = colorResource(id = R.color.selected))
                 )
             }
         }
@@ -72,10 +62,10 @@ fun CustomAlertDialog(
 }
 
 @Composable
-fun ProgressDialogWidget(){
+fun ProgressDialog(){
     CircularProgressIndicator(
         modifier = Modifier.size(64.dp),
-            color = colorResource(id = R.color.selected ),
-        trackColor = colorResource(id = R.color.LightColor )
+        color = colorResource(id = R.color.selected),
+        trackColor = colorResource(id = R.color.LightColor)
     )
 }
