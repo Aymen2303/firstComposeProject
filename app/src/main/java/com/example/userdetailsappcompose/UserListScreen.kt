@@ -3,6 +3,7 @@ import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
@@ -20,6 +21,7 @@ fun UserListScreen(
     val users = remember { mutableStateListOf<User>() }
     val isLoading = remember { mutableStateOf(false) }
     val showAlertDialog = remember { mutableStateOf(false) }
+    val listState = rememberLazyListState()
 
         LaunchedEffect(refreshTrigger.value) {
             isLoading.value = true
@@ -53,7 +55,7 @@ fun UserListScreen(
                     .wrapContentSize(Alignment.Center)
             )
         } else {
-            LazyColumn(modifier = modifier) {
+            LazyColumn(state = listState) {
                 itemsIndexed(users) { index, user ->
                     CardUserDetails(user)
                     if(index < users.lastIndex)
