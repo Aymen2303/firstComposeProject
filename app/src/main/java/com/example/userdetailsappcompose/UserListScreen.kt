@@ -1,4 +1,5 @@
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import com.example.userdetailsappcompose.CardUserDetails
 import com.example.userdetailsappcompose.network.RetrofitInstance
@@ -22,6 +24,7 @@ fun UserListScreen(
     val isLoading = remember { mutableStateOf(false) }
     val showAlertDialog = remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
+    val context = LocalContext.current //debugging purposes only
 
         LaunchedEffect(refreshTrigger.value) {
             isLoading.value = true
@@ -57,7 +60,11 @@ fun UserListScreen(
         } else {
             LazyColumn(state = listState) {
                 itemsIndexed(users) { index, user ->
-                    CardUserDetails(user)
+                    CardUserDetails(user,
+                        onClick = {
+                            ///Change here later...
+                            Toast.makeText(context, "${user.name.first} ${user.name.last} Card is clicked", Toast.LENGTH_LONG).show()
+                        })
                     if(index < users.lastIndex)
                         Spacer(modifier = Modifier.height(8.dp))
                 }

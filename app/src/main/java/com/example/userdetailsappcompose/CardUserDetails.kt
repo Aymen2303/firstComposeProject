@@ -3,6 +3,7 @@ package com.example.userdetailsappcompose
 import User
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
@@ -22,7 +23,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun CardUserDetails(user: User) {
+fun CardUserDetails(
+    user: User,
+    onClick: () -> Unit
+    ) {
+    
+    val painter = rememberAsyncImagePainter(model = user.picture.large)
+    
     OutlinedCard(
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.backgroundColor),
@@ -31,7 +38,9 @@ fun CardUserDetails(user: User) {
             1.dp,
             color = colorResource(id = R.color.selected)
         ),
-        modifier = Modifier.size(width = 350.dp, height = 150.dp)
+        modifier = Modifier
+            .size(width = 350.dp, height = 150.dp)
+            .clickable { onClick() }
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -43,7 +52,7 @@ fun CardUserDetails(user: User) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = user.picture.large),
+                    painter = painter,
                     contentDescription = "User profile picture",
                     modifier = Modifier
                         .size(75.dp)
