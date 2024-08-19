@@ -25,7 +25,7 @@ fun CustomFAB(
 ) {
     FloatingActionButton(
             onClick = onClick,
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = Color.White,
             contentColor = contentColor,
             modifier = modifier.size(56.dp)
     ) {

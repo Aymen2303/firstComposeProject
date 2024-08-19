@@ -31,8 +31,7 @@ fun CardUserDetails(user: User) {
             1.dp,
             color = colorResource(id = R.color.selected)
         ),
-        modifier = Modifier
-            .size(width = 350.dp, height = 150.dp)
+        modifier = Modifier.size(width = 350.dp, height = 150.dp)
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
