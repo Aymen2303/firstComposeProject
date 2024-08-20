@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation (libs.retrofit2.retrofit)
     implementation (libs.logging.interceptor)
+    implementation (libs.androidx.navigation.compose)
+    implementation(libs.protolite.well.known.types)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

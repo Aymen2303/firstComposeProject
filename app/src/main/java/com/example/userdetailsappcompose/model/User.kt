@@ -1,4 +1,9 @@
 import com.google.gson.annotations.SerializedName
+import com.google.type.Date
+import com.google.type.DateTime
+import java.text.DateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 data class ApiResponse(
     val results: List<User>
@@ -30,3 +35,10 @@ data class Picture(
 data class Dob(
     val date: String
 )
+
+fun toDate(wrongDate: String): String{
+   val formatter = DateTimeFormatter.ISO_DATE_TIME
+    val parsedDate = LocalDateTime.parse(wrongDate, formatter)
+    val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    return parsedDate.format(outputFormatter)
+}

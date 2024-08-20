@@ -12,7 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.userdetailsappcompose.CardUserDetails
+import com.example.userdetailsappcompose.navigation.Route
 import com.example.userdetailsappcompose.network.RetrofitInstance
 
 @Composable
@@ -21,6 +24,8 @@ fun UserListScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current //debugging purposes only
+
+    val navController = rememberNavController()
 
     val refreshTrigger = remember { mutableStateOf(false) }
 
@@ -80,8 +85,15 @@ fun UserListScreen(
                         CardUserDetails(
                             user = user,
                             onClick = {
-                                // TODO(Change here later...)
-                                Toast.makeText(context, "${user.name.first} ${user.name.last} Card is clicked", Toast.LENGTH_LONG).show()
+                               navController.navigate(
+                                  Route.UserDetails.CreateRoute(
+                                      name = "${user.name.first} ${user.name.last}",
+                                      user.email,
+                                      user.dob.date,
+                                      user.phoneNumber
+                                  )
+                               )
+                                Toast.makeText(context, "${user.name.first} ${user.name.last} infos are being sent", Toast.LENGTH_LONG).show()
                             }
                         )
                         if(index < users.lastIndex)
