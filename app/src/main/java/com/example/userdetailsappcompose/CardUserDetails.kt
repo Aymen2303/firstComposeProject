@@ -3,7 +3,16 @@ package com.example.userdetailsappcompose
 import User
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedCard
@@ -22,20 +31,24 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun CardUserDetails(user: User) {
+fun CardUserDetails(
+    user: User,
+    onClick: () -> Unit
+) {
+    val painter = rememberAsyncImagePainter(model = user.picture.large)
+    
     OutlinedCard(
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.backgroundColor),
         ),
         border = BorderStroke(
-            1.dp,
+            width = 1.dp,
             color = colorResource(id = R.color.selected)
         ),
-        modifier = Modifier.size(width = 350.dp, height = 150.dp)
+        modifier = Modifier.size(width = 350.dp, height = 150.dp),
+        onClick = onClick
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
+        Box(modifier = Modifier.fillMaxSize()) {
             Row(
                 modifier = Modifier
                     .padding(15.dp)
@@ -43,7 +56,7 @@ fun CardUserDetails(user: User) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = user.picture.large),
+                    painter = painter,
                     contentDescription = "User profile picture",
                     modifier = Modifier
                         .size(75.dp)
@@ -85,7 +98,7 @@ fun CardUserDetails(user: User) {
                 }
             }
             Text(
-                "Click For more information",
+                text = "Click for more information",
                 style = TextStyle(
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Normal,
