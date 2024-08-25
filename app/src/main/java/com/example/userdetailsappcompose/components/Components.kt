@@ -1,11 +1,12 @@
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -15,6 +16,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FloatingActionButton
@@ -29,6 +31,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.userdetailsappcompose.R
@@ -98,8 +101,8 @@ fun UserDobElevatedCard(user : User){
     ) {
         Box(
             modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.backgroundButton))
+                .fillMaxSize()
+                .background(color = colorResource(id = R.color.backgroundButton))
         ){
             Row(
                 modifier = Modifier
@@ -137,3 +140,134 @@ fun UserDobElevatedCard(user : User){
         }
     }
 }
+
+@Composable
+fun UserInformationsBox(user: User){
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .width(250.dp)
+    ) {
+        Text(
+            text = "User Informations",
+            style = TextStyle(
+                fontSize = 24.sp,
+                fontFamily = FontFamily.SansSerif
+            )
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Full Name",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            )
+            Spacer(modifier = Modifier.width(50.dp))
+
+            Text(
+                text = "${user.name.first} ${user.name.last} ",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                color = colorResource(id = R.color.hintText)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomDivider()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "E-mail",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            )
+            Spacer(modifier = Modifier.width(50.dp))
+
+            Text(
+                text = user.email,
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                color = colorResource(id = R.color.hintText)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomDivider()
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Phone",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            )
+            Spacer(modifier = Modifier.width(50.dp))
+
+            Text(
+                text = user.phoneNumber,
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                color = colorResource(id = R.color.hintText)
+            )
+        }
+    }
+}
+
+@Composable
+fun CustomDivider(
+    color : Color = colorResource(id = R.color.LightColor),
+    thickness : Dp = 1.dp,
+    modifier : Modifier = Modifier
+){
+    Divider(
+        color = color,
+        thickness = thickness,
+        modifier = modifier
+    )
+}
+
+/*@Preview
+@Composable
+fun SeeIt(){
+    val name = Name(first = "Jiji", last = "Nii")
+    val location = Location(country = "Japan")
+    val picture = Picture(large = "https://example.com/image.jpg")
+    val originalDobString = "2023-04-04T12:34:56Z"
+    val dob = Dob(date = toDate(originalDobString))
+    val user1 = User(
+        name = name,
+        email = "jiji@nii.com",
+        location = location,
+        picture = picture,
+        phoneNumber = "0892345823459235",
+        dob = dob
+    )
+    UserDetailsAppComposeTheme {
+        UserInformationsBox(user = user1)
+    }
+}
+
+ */

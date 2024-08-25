@@ -21,11 +21,10 @@ import com.example.userdetailsappcompose.network.RetrofitInstance
 @Composable
 fun UserListScreen(
     retrofitInstance: RetrofitInstance,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current //debugging purposes only
-
-    val navController = rememberNavController()
 
     val refreshTrigger = remember { mutableStateOf(false) }
 
@@ -93,7 +92,11 @@ fun UserListScreen(
                                       user.phoneNumber
                                   )
                                )
-                                Toast.makeText(context, "${user.name.first} ${user.name.last} infos are being sent", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    context,
+                                    "${user.name.first} ${user.name.last} infos are being sent",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         )
                         if(index < users.lastIndex)
