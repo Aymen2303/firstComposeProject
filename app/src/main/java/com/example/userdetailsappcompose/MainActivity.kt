@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.compose.rememberNavController
+import com.example.userdetailsappcompose.navigation.Navigation
 import com.example.userdetailsappcompose.network.RetrofitInstance
 import com.example.userdetailsappcompose.ui.theme.UserDetailsAppComposeTheme
 
@@ -23,8 +25,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             UserDetailsAppComposeTheme {
+                val navController = rememberNavController()
                 BackgroundImageContent {
-                    UserListScreen(
+                    Navigation(
+                        navController = navController,
                         retrofitInstance = retrofitInstance
                     )
                 }
