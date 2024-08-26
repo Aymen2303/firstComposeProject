@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.userdetailsappcompose.R
 import com.example.userdetailsappcompose.ui.theme.UserDetailsAppComposeTheme
+import java.util.Date
 
 @Composable
 fun CustomFAB(
@@ -92,7 +93,7 @@ fun ProgressDialog(){
 }
 
 @Composable
-fun UserDobElevatedCard(user : User){
+fun UserDobElevatedCard(dateOfBirth : String){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -127,7 +128,7 @@ fun UserDobElevatedCard(user : User){
                     )
                     Spacer(modifier = Modifier.padding(top = 10.dp))
                     Text(
-                        text = user.dob.date,
+                        text = dateOfBirth,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal,
@@ -142,7 +143,11 @@ fun UserDobElevatedCard(user : User){
 }
 
 @Composable
-fun UserInformationsBox(user: User){
+fun UserInformationsBox(
+    name : String,
+    email : String,
+    phoneNumber : String
+){
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -172,7 +177,7 @@ fun UserInformationsBox(user: User){
             Spacer(modifier = Modifier.width(50.dp))
 
             Text(
-                text = "${user.name.first} ${user.name.last} ",
+                text = name,
                 style = TextStyle(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
@@ -198,7 +203,7 @@ fun UserInformationsBox(user: User){
             Spacer(modifier = Modifier.width(50.dp))
 
             Text(
-                text = user.email,
+                text = email,
                 style = TextStyle(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
@@ -225,7 +230,7 @@ fun UserInformationsBox(user: User){
             Spacer(modifier = Modifier.width(50.dp))
 
             Text(
-                text = user.phoneNumber,
+                text = phoneNumber,
                 style = TextStyle(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
@@ -249,25 +254,3 @@ fun CustomDivider(
     )
 }
 
-/*@Preview
-@Composable
-fun SeeIt(){
-    val name = Name(first = "Jiji", last = "Nii")
-    val location = Location(country = "Japan")
-    val picture = Picture(large = "https://example.com/image.jpg")
-    val originalDobString = "2023-04-04T12:34:56Z"
-    val dob = Dob(date = toDate(originalDobString))
-    val user1 = User(
-        name = name,
-        email = "jiji@nii.com",
-        location = location,
-        picture = picture,
-        phoneNumber = "0892345823459235",
-        dob = dob
-    )
-    UserDetailsAppComposeTheme {
-        UserInformationsBox(user = user1)
-    }
-}
-
- */
