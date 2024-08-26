@@ -40,7 +40,7 @@ fun Navigation(
             val dob = backStackEntry.arguments?.getString("dob") ?: ""
             val phone = backStackEntry.arguments?.getString("phone") ?: ""
             val imageUrl = backStackEntry.arguments?.getString("imageUrl") ?: ""
-            UserDetailsScreen(name, email, dob, phone, imageUrl)
+            UserDetailsScreen(navController,name, email, dob, phone, imageUrl)
         }
     }
 }
