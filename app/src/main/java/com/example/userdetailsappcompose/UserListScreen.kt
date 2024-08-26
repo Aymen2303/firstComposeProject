@@ -89,7 +89,7 @@ fun UserListScreen(
                                   Route.UserDetails.CreateRoute(
                                       name = "${user.name.first} ${user.name.last}",
                                       user.email,
-                                      user.dob.date,
+                                      dob = toDate(user.dob.date),
                                       user.phoneNumber,
                                       imageUrl = "${Uri.encode(user.picture.large)}"
                                   )

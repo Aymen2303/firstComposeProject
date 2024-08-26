@@ -5,6 +5,7 @@ import com.google.type.Date
 import com.google.type.DateTime
 import java.text.DateFormat
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 data class ApiResponse(
@@ -39,8 +40,8 @@ data class Dob(
 )
 
 fun toDate(wrongDate: String): String{
-   val formatter = DateTimeFormatter.ISO_DATE_TIME
-    val parsedDate = LocalDateTime.parse(wrongDate, formatter)
+    val formatter = DateTimeFormatter.ISO_DATE_TIME
     val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val parsedDate = ZonedDateTime.parse(wrongDate, formatter)
     return parsedDate.format(outputFormatter)
 }
