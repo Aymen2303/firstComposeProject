@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import java.net.URL
 
 @Composable
 fun UserDetailsScreen(
@@ -22,13 +23,23 @@ fun UserDetailsScreen(
     email: String,
     dob: String,
     phone: String,
+    imageUrl : String
 ) {
+    val painter = rememberAsyncImagePainter(model = imageUrl)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
+        Image(
+            painter = painter,
+            contentDescription = "User profile picture",
+            modifier = Modifier
+                .size(150.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
         Text(text = "Name: $name")
         Text(text = "Email: $email")
         Text(text = "Date of Birth: $dob")

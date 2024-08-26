@@ -1,3 +1,4 @@
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.*
@@ -89,7 +90,8 @@ fun UserListScreen(
                                       name = "${user.name.first} ${user.name.last}",
                                       user.email,
                                       user.dob.date,
-                                      user.phoneNumber
+                                      user.phoneNumber,
+                                      imageUrl = "${Uri.encode(user.picture.large)}"
                                   )
                                )
                                 Toast.makeText(
