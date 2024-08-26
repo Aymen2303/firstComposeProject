@@ -1,3 +1,5 @@
+import android.os.Parcelable
+import androidx.compose.ui.layout.Placeable
 import com.google.gson.annotations.SerializedName
 import com.google.type.Date
 import com.google.type.DateTime
