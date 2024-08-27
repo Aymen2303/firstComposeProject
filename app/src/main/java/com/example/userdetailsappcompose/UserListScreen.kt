@@ -10,6 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -25,29 +28,46 @@ fun UserListScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current //debugging purposes only
+    val refreshTrigger = rememberSaveable { mutableStateOf(false) }
 
-    val refreshTrigger = remember { mutableStateOf(false) }
+    val users = rememberMutableStateListOf<User>()
 
-    val users = remember { mutableStateListOf<User>() }
+    val isLoading = rememberSaveable{ mutableStateOf(true) }
 
-    val isLoading = remember { mutableStateOf(false) }
-
-    val showAlertDialog = remember { mutableStateOf(false) }
+    val showAlertDialog = rememberSaveable { mutableStateOf(false) }
 
     val listState = rememberLazyListState()
 
     LaunchedEffect(refreshTrigger.value) {
-        isLoading.value = true
-        try {
-            val response = retrofitInstance.service.listUsers(10)
-            val sortedUsers = response.results.sortedBy { it.name.first }
-            users.clear()
-            users.addAll(sortedUsers)
-            showAlertDialog.value = false
-        } catch (e: Exception) {
-            showAlertDialog.value = true
-            Log.e("ApiError", "Error fetching users", e)
+       if (refreshTrigger.value ) {
+           isLoading.value = true
+           try {
+               val response = retrofitInstance.service.listUsers(10)
+               val sortedUsers = response.results.sortedBy { it.name.first }
+               users.clear()
+               users.addAll(sortedUsers)
+               showAlertDialog.value = false
+           } catch (e: Exception) {
+               showAlertDialog.value = true
+               Log.e("ApiError", "Error fetching users", e)
+           }
+           refreshTrigger.value = false
+       }
+        isLoading.value = false
+    }
+
+    LaunchedEffect(Unit) {
+        if (users.isEmpty()) {
+            try {
+                val response = retrofitInstance.service.listUsers(10)
+                val sortedUsers = response.results.sortedBy { it.name.first }
+                users.clear()
+                users.addAll(sortedUsers)
+                showAlertDialog.value = false
+            } catch (e: Exception) {
+                showAlertDialog.value = true
+                Log.e("ApiError", "Error fetching users", e)
+            }
         }
         isLoading.value = false
     }
@@ -91,14 +111,9 @@ fun UserListScreen(
                                       user.email,
                                       dob = toDate(user.dob.date),
                                       user.phoneNumber,
-                                      imageUrl = "${Uri.encode(user.picture.large)}"
+                                      imageUrl = Uri.encode(user.picture.large)
                                   )
                                )
-                                Toast.makeText(
-                                    context,
-                                    "${user.name.first} ${user.name.last} infos are being sent",
-                                    Toast.LENGTH_LONG
-                                ).show()
                             }
                         )
                         if(index < users.lastIndex)
@@ -121,3 +136,30 @@ fun UserListScreen(
     }
 }
 
+@Composable
+fun <T: Any> rememberMutableStateListOf(vararg elements: User): SnapshotStateList<User> {
+    return rememberSaveable(saver = snapshotStateListUserSaver()) {
+        elements.toList().toMutableStateList()
+    }
+}
+
+private fun snapshotStateListUserSaver() = listSaver<SnapshotStateList<User>, Any>(
+    save = { stateList ->
+        stateList.map { listItem -> listOf(listItem.name.first, listItem.name.last, listItem.email, listItem.location.country, listItem.picture.large, listItem.phoneNumber, listItem.dob.date) } },
+    restore = { savedList ->
+        SnapshotStateList<User>().apply {
+            savedList.forEach { savedItem ->
+                val savedItem2 = savedItem as List<*>
+                val user = User(
+                    name = Name(first = savedItem2[0] as String, last = savedItem2[1] as String),
+                    email = savedItem2[2] as String,
+                    location = Location(country = savedItem2[3] as String),
+                    picture = Picture(large = savedItem2[4] as String),
+                    phoneNumber = savedItem2[5] as String,
+                    dob = Dob(date = savedItem2[6] as String)
+                )
+                add(user)
+            }
+        }
+    },
+)

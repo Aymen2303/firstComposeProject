@@ -30,6 +30,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -93,7 +94,10 @@ fun ProgressDialog(){
 }
 
 @Composable
-fun UserDobElevatedCard(dateOfBirth : String){
+fun UserDobElevatedCard(
+    dateOfBirth : String,
+    modifier : Modifier
+    ){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -151,7 +155,7 @@ fun UserInformationsBox(
     Column(
         modifier = Modifier
             .padding(16.dp)
-            .width(250.dp)
+            .fillMaxWidth()
     ) {
         Text(
             text = "User Informations",
@@ -160,7 +164,7 @@ fun UserInformationsBox(
                 fontFamily = FontFamily.SansSerif
             )
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -171,10 +175,11 @@ fun UserInformationsBox(
                 text = "Full Name",
                 style = TextStyle(
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.Thin
+                    fontWeight = FontWeight.Normal,
+                    color = colorResource(id = R.color.black)
                 )
             )
-            Spacer(modifier = Modifier.width(50.dp))
+            Spacer(modifier = Modifier.width(80.dp))
 
             Text(
                 text = name,
@@ -185,7 +190,7 @@ fun UserInformationsBox(
                 color = colorResource(id = R.color.hintText)
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         CustomDivider()
         Row(
             modifier = Modifier
@@ -197,10 +202,11 @@ fun UserInformationsBox(
                 text = "E-mail",
                 style = TextStyle(
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.Thin
+                    fontWeight = FontWeight.Normal,
+                    color = colorResource(id = R.color.black)
                 )
             )
-            Spacer(modifier = Modifier.width(50.dp))
+            Spacer(modifier = Modifier.width(100.dp))
 
             Text(
                 text = email,
@@ -211,7 +217,7 @@ fun UserInformationsBox(
                 color = colorResource(id = R.color.hintText)
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         CustomDivider()
 
         Row(
@@ -224,10 +230,11 @@ fun UserInformationsBox(
                 text = "Phone",
                 style = TextStyle(
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.Thin
+                    fontWeight = FontWeight.Normal,
+                    color = colorResource(id = R.color.black)
                 )
             )
-            Spacer(modifier = Modifier.width(50.dp))
+            Spacer(modifier = Modifier.width(100.dp))
 
             Text(
                 text = phoneNumber,
@@ -254,3 +261,13 @@ fun CustomDivider(
     )
 }
 
+@Preview
+@Composable
+fun viewUserINFOBox(){
+    UserDetailsAppComposeTheme {
+        UserInformationsBox(
+            name = "jjjh kjhiji",
+            email = "jiji@gmial.com",
+            phoneNumber = "0524524")
+    }
+}
